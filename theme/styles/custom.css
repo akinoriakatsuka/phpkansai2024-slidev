@@ -1,0 +1,13 @@
+.slidev-layout {
+    @apply text-[1.5rem];
+
+
+    p {
+        line-height: 2rem;
+    }
+
+    code {
+        @apply text-[1.2rem];
+        line-height: 1.6rem;
+    }
+}
