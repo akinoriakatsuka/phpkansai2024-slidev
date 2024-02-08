@@ -6,8 +6,12 @@
         line-height: 2rem;
     }
 
-    code {
-        @apply text-[1.2rem];
-        line-height: 1.6rem;
+    pre code {
+        font-size: 1.5em;
+        line-height: 1.5em;
+    }
+
+    a.image-link {
+        border-bottom: none;
     }
 }

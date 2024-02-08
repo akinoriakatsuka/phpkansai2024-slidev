@@ -11,10 +11,9 @@ transition: none
 title: autoloadのはなし
 colorSchema: light
 aspectRatio: '16/9'
-canvasWidth: 980
+canvasWidth: 960
 mdc: true
 layout: center
-background: white
 ---
 
 <h1 id="title" style="text-align: left;font-size: 2.5rem; line-height: 3rem">
@@ -33,14 +32,35 @@ background: white
 
 # 自己紹介
 
-|  |  |
-| --- | --- |
-| 名前 | 赤塚啓紀 |
-| 所属 | 株式会社オフショア |
-| 仕事 | 神戸の会社でPHPで医療機関向けの業務支援システムを作っています。 |
-| X | <a href="https://twitter.com/aki_artisan">あかつか(@aki_artisan)</a> |
-| 趣味 | 散歩、ハイキング、甘いもの |
-|  | 昨年関西に引っ越してきてきました<br>システム開発歴はだいたい3年です |
+<div>
+  <table>
+    <tr>
+      <td>名前</td>
+      <td>赤塚啓紀</td>
+    </tr>
+    <tr>
+      <td>所属</td>
+      <td>株式会社オフショア</td>
+    </tr>
+    <tr>
+      <td>仕事</td>
+      <td>神戸の会社でPHPで医療機関向けの業務支援システムを作っています。</td>
+    </tr>
+    <tr>
+      <td>X</td>
+      <td><a href="https://twitter.com/aki_artisan">あかつか(@aki_artisan)</a></td>
+    </tr>
+    <tr>
+      <td>趣味</td>
+      <td>散歩、ハイキング、甘いもの</td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>昨年関西に引っ越してきてきました<br>システム開発歴はだいたい3年です</td>
+    </tr>
+  </table>
+</div>
+
 
 ---
 
@@ -48,21 +68,19 @@ background: white
 
 - このようなエラーを見たことはないでしょうか？
 
-- そして、よくわからないけど、ファイル名を直したらうまく動くようになった！という経験はないでしょうか？
-
 - Laravelで開発していた時の私が遭遇したエラーです。
 
 ---
 
-# 私がやった解決方法
+# 解決方法
 
-- エラーで検索して、ファイル名とクラス名を揃えるようにしたらうまく動くようになった。
+- ファイル名とクラス名を揃えるようにしたらうまく動くようになった
 
-- でも、なんでファイル名とクラス名を揃えると動くようになったのか、よくわかっていませんでした。
+- なんでファイル名とクラス名を揃えると動くようになったのか、よくわかっていませんでした
 
-- よくわかっていないと、次に同じエラーが出たときにちゃんと治せるか不安ですよね。
+- 次に同じエラーが出たときにちゃんと治せるか不安
 
-- ちゃんと理解しておけば、怖くありません。
+ちゃんと理解しておけば、怖くありません
 
 
 ---
@@ -86,7 +104,8 @@ layout: cover
 ---
 
 # autoloadとは
-- 未定義のクラス（インターフェース、トレイトも含む）を呼び出したときに、<br>PHPが自動的にクラスの定義を書いたファイルを読み込んでくれるしくみ
+
+未定義のクラス（インターフェース、トレイトも含む）を呼び出したときに、PHPが自動的にクラスの定義を書いたファイルを読み込んでくれるしくみ
 
 ---
 layout: center
@@ -110,7 +129,6 @@ layout: cover
 
 # 1. PSR-4ってなに？
 
-<div>
 autoloadのルール
 
 PHP-FIGという団体が決めていて、デファクトスタンダード（事実上の標準）
@@ -118,7 +136,6 @@ PHP-FIGという団体が決めていて、デファクトスタンダード（�
 依存関係を管理するcomposerというツールがこのルールを満たすようにautoloadを実装してくれています
 
 ということは、使う時はこのルールを守れば良いということ！
-</div>
 
 ---
 
@@ -129,7 +146,12 @@ PHP-FIGという団体が決めていて、デファクトスタンダード（�
 
 →今はわからなくても大丈夫です！後ほどコードを見ながら説明します。
 
-翻訳した<a href="https://zenn.dev/aki_artisan/articles/psr4-translation-ja">記事</a>があるので、興味のある人は読んでみてください。
+<div style="text-align: center;">
+  <a class="image-link" href="https://zenn.dev/aki_artisan/articles/psr4-translation-ja" style="display:inline-block;">
+    <img src="https://res.cloudinary.com/zenn/image/upload/s--PukdpG2p--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:PSR-4%2520%25E3%2582%25AA%25E3%2583%25BC%25E3%2583%2588%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2580%25E3%2583%25BC%25EF%25BC%2588%25E6%2597%25A5%25E6%259C%25AC%25E8%25AA%259E%25E8%25A8%25B3%25EF%25BC%2589%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%258B%25E3%2581%25A4%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5NDMyMGUwMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" alt="PSR-4 オートローダー（日本語訳）" width="400px">
+  </a>
+</div>
+
 </div>
 
 ---
@@ -173,8 +195,6 @@ class Person
   ```
   </div>
 </div>
-
-グループ化できるのでまとまりをわかりやすくできるし、Personクラスを他に作ったとしても名前空間が別だと、同じクラス名でも衝突しないようになる。
 
 ---
 layout: cover
@@ -340,7 +360,7 @@ $person->greet('Taro'); // Hello Taro!
 # 3. autoloadを使う場合（composer）
 
 - ファイルを直接指定していなくても`Person`クラスが読み込めています。
-- ここでファイル名を間違って、`src/Models/Preson.php`に書いてしまったとすると、autoload時に`Person.php`を探してしまうので、エラーになってしまいます。
+- クラス名で読み込むファイル名が決まるので、ファイル名とクラス名を揃える必要があります。
 
 ここまでが、autoloadの動きの部分です。
 
@@ -496,17 +516,19 @@ layout: cover
 
 # 1. 業務で役立つ
 
-<div>
-エラーが出ても、ちゃんとどうすれば良いかわかった上で対応できるので、問題解決が早くなります。
-</div>
+<ul>
+<li>エラーが出ても、ちゃんとどうすれば良いかわかった上で対応できるので、問題解決が早くなる</li>
+<li>フレームワークのソースコードがどこにあるかわかる</li>
+</ul>
 
 ---
 
 # 2. 勉強しているときにサクッとautoloadをかける
 
-<div>
-本で勉強してみたいときなど、autoloadを正しく設定できると、すぐに本題に入れるようになります。
-</div>
+<ul>
+<li>本で勉強してみたいときなど、autoloadを正しく設定できると、すぐに本題に入れるようになる！</li>
+</ul>
+
 
 ---
 
@@ -515,33 +537,44 @@ layout: cover
 - **autoloadとは**
   - 未定義のクラスを呼び出したときに、PHPが自動的にクラスが定義されているファイルを読み込んでくれるしくみ
 
-- **なんでファイル名とクラス名を揃えるの？**
-  - autoloadのルール（PSR-4）がそうなっているから
 - **autoloadを使うにはcomposerを使うのが無難**
 
----
-layout: center
----
-
-# 今日の話は<a href="https://zenn.dev/aki_artisan/articles/php-autoloading">ブログ</a>にまとめてあるので、<br>文字で読みたい方はそちらもどうぞ！
+- **なんでファイル名とクラス名を揃えるの？**
+  - autoloadのルール（PSR-4）がそうなっているから
 
 ---
 layout: center
 ---
 
+# 今日の話はブログにまとめてあるので、<br>文字で読みたい方はそちらもどうぞ！
+
+<div style="text-align: center;">
+  <a class="image-link" href="https://zenn.dev/aki_artisan/articles/php-autoloading" style="display:inline-block; width:400px">
+    <img src="https://res.cloudinary.com/zenn/image/upload/s--y-V4ZV4a--/c_fit%2Cg_north_west%2Cl_text:notosansjp-medium.otf_55:php%25E3%2581%25AEautoload%25E3%2582%2592%25E7%2590%2586%25E8%25A7%25A3%25E3%2581%2599%25E3%2582%258B%2Cw_1010%2Cx_90%2Cy_100/g_south_west%2Cl_text:notosansjp-medium.otf_37:%25E3%2581%2582%25E3%2581%258B%25E3%2581%25A4%25E3%2581%258B%2Cx_203%2Cy_121/g_south_west%2Ch_90%2Cl_fetch:aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3plbm4tdXNlci11cGxvYWQvYXZhdGFyL2I5NDMyMGUwMTEuanBlZw==%2Cr_max%2Cw_90%2Cx_87%2Cy_95/v1627283836/default/og-base-w1200-v2.png" alt="phpのautoloadを理解する" width="400px">
+  </a>
+</div>
+
+
+
+---
+layout: image-right
+image: ./public/images/note-thanun-WOo1qkKIHiI-unsplash.jpg
+---
 
 # Contact
 
-<div>
-Twitter: <a href="https://twitter.com/aki_artisan">@aki_artisan</a>
-
-GitHub: <a href="https://github.com/akinoriakatsuka">akinoriakatsuka</a>
-
-Ask the speaker きてね！
+<div style="position: relative; height: calc(552px - 80px - 56px)">
+<div style="position: absolute; top: 50%; left: 0%; transform: translateY(-50%); -webkit- transform: translateY(-50%);">
+  <p>Twitter: <a href="https://twitter.com/aki_artisan">@aki_artisan</a></p>
+  <p>Email: <a href="mailto:akinoriakatsuka@gmail.com">akinoriakatsuka@gmail.com</a></p>
+  <p>GitHub: <a href="https://github.com/akinoriakatsuka">akinoriakatsuka</a></p>
+  <p>Ask the speaker きてね！</p>
+</div>
 </div>
 
 ---
-layout: center
+layout: cover
+background: ./public/images/note-thanun-WOo1qkKIHiI-unsplash.jpg
 ---
 
 # ご清聴ありがとうございました
