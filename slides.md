@@ -566,7 +566,6 @@ image: ./public/images/note-thanun-WOo1qkKIHiI-unsplash.jpg
 <div style="position: relative; height: calc(552px - 80px - 56px)">
 <div style="position: absolute; top: 50%; left: 0%; transform: translateY(-50%); -webkit- transform: translateY(-50%);">
   <p>Twitter: <a href="https://twitter.com/aki_artisan">@aki_artisan</a></p>
-  <p>Email: <a href="mailto:akinoriakatsuka@gmail.com">akinoriakatsuka@gmail.com</a></p>
   <p>GitHub: <a href="https://github.com/akinoriakatsuka">akinoriakatsuka</a></p>
   <p>Ask the speaker きてね！</p>
 </div>
