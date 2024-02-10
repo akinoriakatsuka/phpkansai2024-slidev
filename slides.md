@@ -44,20 +44,27 @@ layout: center
     </tr>
     <tr>
       <td>仕事</td>
-      <td>神戸の会社でPHPで医療機関向けの業務支援システムを作っています。</td>
+      <td>神戸の会社で医療機関向けの業務支援システムを作っています</td>
     </tr>
     <tr>
       <td>X</td>
-      <td><a href="https://twitter.com/aki_artisan">あかつか(@aki_artisan)</a></td>
+      <td>
+          <a href="https://twitter.com/aki_artisan">
+            <div style="display: flex; align-items: flex-end;">
+              <img src="/images/icon.jpg" width=50px></img>
+              あかつか(@aki_artisan)
+            </div>
+          </a>
+      </td>
     </tr>
     <tr>
       <td>趣味</td>
       <td>散歩、ハイキング、甘いもの</td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td></td>
       <td>昨年関西に引っ越してきてきました<br>システム開発歴はだいたい3年です</td>
-    </tr>
+    </tr> -->
   </table>
 </div>
 
@@ -102,12 +109,6 @@ layout: cover
   - → autoloadのルール(<a href="https://www.php-fig.org/psr/psr-4/">PSR-4</a>)がそうなっているから
 
 ---
-
-# autoloadとは
-
-未定義のクラス（インターフェース、トレイトも含む）を呼び出したときに、PHPが自動的にクラスの定義を書いたファイルを読み込んでくれるしくみ
-
----
 layout: center
 ---
 
@@ -127,7 +128,13 @@ layout: cover
 
 ---
 
-# 1. PSR-4ってなに？
+# 1. autoloadとは
+
+未定義のクラス（インターフェース、トレイトも含む）を呼び出したときに、PHPが自動的にクラスの定義を書いたファイルを読み込んでくれるしくみ
+
+---
+
+# 2. PSR-4ってなに？
 
 autoloadのルール
 
@@ -139,7 +146,7 @@ PHP-FIGという団体が決めていて、デファクトスタンダード（�
 
 ---
 
-# 1. PSR-4ってなに？
+# 2. PSR-4ってなに？
 
 <div>
 具体的には、クラス名（名前空間とクラス名）とファイルパス（ディレクトリ構成とファイル名）を揃えるということです。
@@ -156,7 +163,7 @@ PHP-FIGという団体が決めていて、デファクトスタンダード（�
 
 ---
 
-# 2. 名前空間ってなに？
+# 3. 名前空間ってなに？
 
 - クラス名の前につけることができる名前のこと
 
@@ -164,7 +171,7 @@ PHP-FIGという団体が決めていて、デファクトスタンダード（�
 
 ---
 
-# 2. 名前空間ってなに？
+# 3. 名前空間ってなに？
 
 ```php
 namespace App\Models;
@@ -332,18 +339,20 @@ $person->greet('Taro'); // Hello Taro!
       }
   }
   ```
-- この設定は、`App`という名前空間を`src`ディレクトリに紐づけるという意味です。
+- `App`という名前空間を`src`ディレクトリに紐づける
 
 ---
 
 # 3. autoloadを使う場合（composer）
 
-- この記述を追加した後は、以下のコマンドを実行する必要があります。
+- この記述を追加した後は、以下のコマンドを実行する必要があります
   ```shell
   $ composer dump-autoload
   ```
 
-- ※同じディレクトリにある他のクラスが読み込めていたら、`composer.json`の設定や`composer dump-autoload`は不要です。
+※同じディレクトリにある他のクラスが読み込めていたら、`composer.json`の設定や`composer dump-autoload`は不要です。
+
+（この辺りはAsk the speaker で聞いてね）
 
 ---
 
@@ -374,19 +383,17 @@ $person->greet('Taro'); // Hello Taro!
 
 # 4. autoloadを実現する仕組み
 
-- phpのautoloadを使うには`spl_autoload_register`という関数を使って、<br>「**クラスが未定義だったらこれをしてね**」という処理を登録しておきます。
+- autoloadを使うには`spl_autoload_register`という関数を使って、<br>「**クラスが未定義だったらこれをしてね**」という処理を登録しておく
 
-- これをしておかないとPHPは何をして良いかわからず、結果として「クラスが見つからない」というエラーが出ます。
+- これをしておかないとPHPは何をして良いかわからず、結果として「クラスが見つからない」というエラーが出る
 
 ---
 
 # 4. autoloadを実現する仕組み
 
-- composerを使う場合は、`vender/autoload.php`や、`vendor/composer/autoload_real.php`にこの処理が書かれています。
+- composerを使う場合は、`vender/autoload.php`や、`vendor/composer/autoload_real.php`にこの処理が書かれている
 
-- ので、気になったら見てみてください。
-
-- （私にはちょっと難しかったです。）
+ので、気になったら見てみてください。（私にはちょっと難しかったです。）
 
 ---
 layout: cover
@@ -501,9 +508,9 @@ spl_autoload_register(function ($class) {
 # autoloadを自作する
 
 <div>
-このようにして、`spl_autoload_register`を使ってautoloadを実装できました。
+このようにして<code>spl_autoload_register</code> を使ってautoloadを実装できました。
 
-※実用ではcomposerに頼った方が良いです。<!-- .element: style="font-size: 0.6em;" -->
+※実用ではcomposerに頼った方が良いです。
 </div>
 
 ---
@@ -534,13 +541,14 @@ layout: cover
 
 # まとめ
 
+- **なんでファイル名とクラス名を揃えるの？**
+  - autoloadのルール（PSR-4）がそうなっているから
+
 - **autoloadとは**
   - 未定義のクラスを呼び出したときに、PHPが自動的にクラスが定義されているファイルを読み込んでくれるしくみ
 
 - **autoloadを使うにはcomposerを使うのが無難**
 
-- **なんでファイル名とクラス名を揃えるの？**
-  - autoloadのルール（PSR-4）がそうなっているから
 
 ---
 layout: center
