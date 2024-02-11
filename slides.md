@@ -40,11 +40,11 @@ layout: center
     </tr>
     <tr>
       <td>所属</td>
-      <td>株式会社オフショア</td>
+      <td>株式会社オフショア（神戸の会社）</td>
     </tr>
     <tr>
       <td>仕事</td>
-      <td>神戸の会社で医療機関向けの業務支援システムを作っています</td>
+      <td>医療機関向けの業務支援システムを作っています</td>
     </tr>
     <tr>
       <td>X</td>
@@ -83,11 +83,11 @@ layout: center
 
 - ファイル名とクラス名を揃えるようにしたらうまく動くようになった
 
-- なんでファイル名とクラス名を揃えると動くようになったのか、よくわかっていませんでした
+- なんでファイル名とクラス名を揃えると動くようになったのか、よくわからない
 
 - 次に同じエラーが出たときにちゃんと治せるか不安
 
-ちゃんと理解しておけば、怖くありません
+**ちゃんと理解しておけば、怖くありません**
 
 
 ---
@@ -106,7 +106,7 @@ layout: cover
 
 # 最初に結論から
 - なんでファイル名とクラス名を揃えるの？
-  - → autoloadのルール(<a href="https://www.php-fig.org/psr/psr-4/">PSR-4</a>)がそうなっているから
+  - **→ autoloadのルール(<a href="https://www.php-fig.org/psr/psr-4/">PSR-4</a>)がそうなっているから**
 
 ---
 layout: center
@@ -142,7 +142,7 @@ PHP-FIGという団体が決めていて、デファクトスタンダード（�
 
 依存関係を管理するcomposerというツールがこのルールを満たすようにautoloadを実装してくれています
 
-ということは、使う時はこのルールを守れば良いということ！
+ということは、**使う時はこのルールを守れば良い**ということ！
 
 ---
 
@@ -285,13 +285,14 @@ $person->greet('Taro'); // Hello Taro!
 - `public/index.php`
   ```php
   <?php
-  require __DIR__ . '/../src/Models/Person.php';
+  require_once __DIR__ . '/../src/Models/Person.php';
   // 使う側のファイルからクラスの定義が書いてあるファイルを読み込む
+  // 使うファイルを全部読み込む必要がある
 
   $person = new App\Models\Person();
   $person->greet('Taro'); // Hello Taro!
   ```
-- 使うクラスが増えると、<br>requireするファイルが増えてしまいます。
+- 使うクラスが増えると、requireするファイルが増えてしまう
 
 ---
 
@@ -319,7 +320,7 @@ $person->greet('Taro'); // Hello Taro!
 
   ```php
   <?php
-  require __DIR__ . '/../vendor/autoload.php';
+  require_once __DIR__ . '/../vendor/autoload.php';
 
   $person = new App\Models\Person();
   $person->greet('Taro');
@@ -329,7 +330,7 @@ $person->greet('Taro'); // Hello Taro!
 
 # 3. autoloadを使う場合（composer）
 
-- `composer.json`に設定を追加します。<br>（新しい名前空間にオートロードを追加する時のみ）
+- `composer.json`に設定を追加します。<br>（新しい名前空間でオートロードを追加する時のみ）
   ```json
   {
       "autoload": {
@@ -368,8 +369,8 @@ $person->greet('Taro'); // Hello Taro!
 
 # 3. autoloadを使う場合（composer）
 
-- ファイルを直接指定していなくても`Person`クラスが読み込めています。
-- クラス名で読み込むファイル名が決まるので、ファイル名とクラス名を揃える必要があります。
+- ファイルを直接指定していなくても`Person`クラスが読み込めている
+- クラス名で読み込むファイル名が決まるので、ファイル名とクラス名を揃える必要がある
 
 ここまでが、autoloadの動きの部分です。
 
@@ -413,7 +414,7 @@ layout: cover
 
 ```php
 spl_autoload_register(function ($class) {
-    // requireなどでクラスの定義が書いてあるファイルを読み込む処理
+    // require_onceなどでクラスの定義が書いてあるファイルを読み込む処理
 });
 ```
 
@@ -447,7 +448,7 @@ class Person
 
 ```php
 <?php
-require __DIR__ . '../lib/autoload.php';
+require_once __DIR__ . '../lib/autoload.php';
 
 $person = new App\Models\Person();
 $person->greet('Taro');
@@ -463,8 +464,7 @@ spl_autoload_register(function ($class) {
     $prefix = 'App\\'; // トップレベル名前空間
     $base_dir = __DIR__ . '/../src/'; // Appに紐づけるディレクトリ
     $len = strlen($prefix); // トップレベル名前空間の長さ
-    $relative_class = substr($class, $len);
-    // トップレベル名前空間を除いたクラス名
+    $relative_class = substr($class, $len); // トップレベル名前空間を除いたクラス名
     $file = $base_dir
         . str_replace('\\', '/', $relative_class)
         . '.php';
@@ -473,14 +473,7 @@ spl_autoload_register(function ($class) {
 
 ```
 
----
-
-# 実行結果
-
-```shell
-$ php public/index.php
-Hello Taro!
-```
+ファイルパスを作って、`require_once`しているだけ！
 
 ---
 
@@ -500,8 +493,6 @@ spl_autoload_register(function ($class) {
 });
 
 ```
-
-なので、ファイル名とクラス名が不一致だと読み込めない
 
 ---
 
